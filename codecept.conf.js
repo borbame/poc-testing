@@ -1,4 +1,5 @@
 const { setHeadlessWhen } = require('@codeceptjs/configure');
+const { devices } = require('playwright');
 
 setHeadlessWhen(process.env.HEADLESS);
 
@@ -6,19 +7,37 @@ exports.config = {
   tests: './*_test.js',
   output: './output',
   helpers: {
-    WebDriver: {
-      url: 'http://localhost',
-      browser: 'chrome',
-      restart: false,
-      desiredCapabilities: {
-        chromeOptions: {
-          args: [ /*"--headless",*/ "--disable-gpu", "--no-sandbox" ]
-        }
-      }
+    Playwright: {
+      url: 'https://www.github.com',
+      show: true,
+      emulate: devices['iPhone 6'],
     }
   },
   include: {
     I: './steps_file.js'
+  },
+  multiple: {
+    smoke: {
+      browsers: [
+        {
+          browser: "webkit",
+          windowSize: "maximize",
+          desiredCapabilities: {
+            acceptSslCerts: true
+          }
+        },
+        {
+          browser: "chromium",
+          windowSize: "maximize",
+          desiredCapabilities: {
+            acceptSslCerts: true
+          }
+        },
+        {
+          emulate: devices['iPhone 6'],
+        }
+      ]
+    },
   },
   bootstrap: null,
   mocha: {},
@@ -31,9 +50,6 @@ exports.config = {
     screenshotOnFail: {
       enabled: true
     },
-    wdio: {
-      enabled: true,
-      services: ['selenium-standalone']
-    }
-  }
+  },
+  
 }
