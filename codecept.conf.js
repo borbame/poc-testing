@@ -1,20 +1,20 @@
-const { setHeadlessWhen } = require('@codeceptjs/configure');
-const { devices } = require('playwright');
+const { setHeadlessWhen } = require("@codeceptjs/configure");
+const { devices } = require("playwright");
 
 setHeadlessWhen(process.env.HEADLESS);
 
 exports.config = {
-  tests: './*_test.js',
-  output: './output',
+  tests: "./*_test.js",
+  output: "./output",
   helpers: {
     Playwright: {
-      url: 'https://www.github.com',
+      url: "http://localhost",
       show: true,
-      emulate: devices['iPhone 6'],
-    }
+      browser: "chromium",
+    },
   },
   include: {
-    I: './steps_file.js'
+    I: "./steps_file.js",
   },
   multiple: {
     smoke: {
@@ -23,33 +23,29 @@ exports.config = {
           browser: "webkit",
           windowSize: "maximize",
           desiredCapabilities: {
-            acceptSslCerts: true
-          }
+            acceptSslCerts: true,
+          },
         },
         {
           browser: "chromium",
           windowSize: "maximize",
           desiredCapabilities: {
-            acceptSslCerts: true
-          }
+            acceptSslCerts: true,
+          },
         },
-        {
-          emulate: devices['iPhone 6'],
-        }
-      ]
+      ],
     },
   },
   bootstrap: null,
   mocha: {},
-  name: 'poc-testing',
-  translation: 'pt-BR',
+  name: "poc-testing",
+  translation: "pt-BR",
   plugins: {
     retryFailedStep: {
-      enabled: true
+      enabled: true,
     },
     screenshotOnFail: {
-      enabled: true
+      enabled: true,
     },
   },
-  
-}
+};

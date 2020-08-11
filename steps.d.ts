@@ -1,9 +1,11 @@
 /// <reference types='codeceptjs' />
 type steps_file = typeof import('./steps_file.js');
+type PlaywrightHelper = import('./helpers/index.js');
 
 declare namespace CodeceptJS {
   interface SupportObject { I: CodeceptJS.I }
   interface CallbackOrder { [0]: CodeceptJS.I }
+  interface Methods extends CodeceptJS.Playwright, PlaywrightHelper {}
   interface Methods extends CodeceptJS.WebDriver {}
   interface I extends ReturnType<steps_file> {}
   namespace Translation {
