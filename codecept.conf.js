@@ -4,13 +4,13 @@ const { devices } = require("playwright");
 setHeadlessWhen(process.env.HEADLESS);
 
 exports.config = {
-  tests: "./*_test.js",
-  output: "./output",
+  tests: "./interface/tests/*.test.js",
+  output: "./interface/output",
   helpers: {
     Playwright: {
       url: "http://localhost",
       show: true,
-      browser: "chromium",
+      emulate: devices["iPhone 11 Pro"],
     },
   },
   include: {

@@ -1,4 +1,4 @@
 node_modules/
-output/
+interface/output/
 package-lock.json
 .env

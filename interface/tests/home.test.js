@@ -1,10 +1,9 @@
-const { url } = require("./mocking");
 require("dotenv").config();
 
-Feature("Page Initial | Sandbox");
+Feature("Page Initial | Sandbox @browser");
 
 Scenario("test something", (I) => {
-  I.amOnPage(url);
+  I.amOnPage("https://farmaciasapp.com.br");
   I.see("Olá, Visitante");
 
   I.click("#login");
@@ -17,4 +16,10 @@ Scenario("test something", (I) => {
   I.pressKey("Enter");
 
   I.see("Fabio");
+});
+
+Feature("Page Initial | Sandbox @device");
+Scenario("test something", (I) => {
+  I.amOnPage("https://farmaciasapp.com.br");
+  I.see("Alterar");
 });
